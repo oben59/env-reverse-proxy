@@ -1,0 +1,21 @@
+# Docker-compose file
+# @author oben59<benoit.oyez@telecomnancy.net>
+##
+
+version: '2'
+
+services:
+  reverse-proxy:
+    image: oben59/reverse-proxy:latest
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    networks:
+      - front
+    ports:
+      - 80:80
+      - 443:443
+    container_name: reverse-proxy
+
+networks:
+  front:
+    external: true
